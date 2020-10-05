@@ -11,6 +11,12 @@ public class GridServerConfiguration extends Configuration {
     @NotEmpty
     private String defaultName;
 
+    @NotEmpty
+    private String bootstrapServersConfig;
+
+    @NotEmpty
+    private String schemaRegistryUrl;
+
     @JsonProperty
     public String getTemplate() {
         return template;
@@ -30,4 +36,16 @@ public class GridServerConfiguration extends Configuration {
     public void setDefaultName(String name) {
         this.defaultName = name;
     }
+
+    @JsonProperty
+    public String getBootstrapServersConfig() { return bootstrapServersConfig; }
+
+    @JsonProperty
+    public void setBootstrapServersConfig(String bootstrapServersConfig) { this.bootstrapServersConfig = bootstrapServersConfig; }
+
+    @JsonProperty
+    public String getSchemaRegistryUrl() { return schemaRegistryUrl; }
+
+    @JsonProperty
+    public void setSchemaRegistryUrl(String schemaRegistryUrl) { this.schemaRegistryUrl = schemaRegistryUrl; }
 }

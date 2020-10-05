@@ -1,2 +1,5 @@
 template: "Hello, %s!"
 defaultName: "Stranger"
+
+bootstrapServersConfig: "localhost:29092"
+schemaRegistryUrl: "http://localhost:8090"

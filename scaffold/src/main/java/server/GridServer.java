@@ -27,7 +27,9 @@ public class GridServer extends Application<GridServerConfiguration> {
                 configuration.getDefaultName()
         );
 
-        final BatteryEventResource batteryEventResource = new BatteryEventResource();
+        final BatteryEventResource batteryEventResource = new BatteryEventResource(
+                configuration.getBootstrapServersConfig(),
+                configuration.getSchemaRegistryUrl());
 
         environment.jersey().register(helloWorldResource);
         environment.jersey().register(batteryEventResource);

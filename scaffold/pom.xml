@@ -43,6 +43,7 @@
     <scala.compat.version>2.12</scala.compat.version>
     <scala.version>2.12.6</scala.version>
     <spec2.version>4.2.0</spec2.version>
+    <jackson.version>2.10.0</jackson.version>
   </properties>
 
   <build>
@@ -222,6 +223,12 @@
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-s3</artifactId>
       <version>${aws.sdk.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
     <!-- Scala support -->
     <dependency>
