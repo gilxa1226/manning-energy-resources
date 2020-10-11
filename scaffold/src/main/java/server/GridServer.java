@@ -1,5 +1,6 @@
 package server;
 
+import com.amazonaws.auth.BasicAWSCredentials;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.dropwizard.Application;
 import io.dropwizard.jdbi3.JdbiFactory;
@@ -23,17 +24,25 @@ public class GridServer extends Application<GridServerConfiguration> {
     }
 
     @Override
-    public void run(GridServerConfiguration configuration,
+    public void run(GridServerConfiguration conf,
                     Environment environment) throws Exception {
 
         final JdbiFactory factory = new JdbiFactory();
-        final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "device-db");
+        final Jdbi jdbi = factory.build(environment, conf.getDataSourceFactory(), "device-db");
 
-        KafkaProducer producer = createProducer(configuration);
+        KafkaProducer producer = createProducer(conf);
         environment.lifecycle().manage(new CloseableManaged(producer));
 
+
+
         environment.jersey().register(
-                new DeviceEndpoint(producer, configuration.getTopic(), jdbi.onDemand(DeviceDAO.class), configuration.getDeviceTable())
+                new DeviceEndpoint(producer,
+                        conf.getTopic(),
+                        jdbi.onDemand(DeviceDAO.class),
+                        conf.getDeviceTable(),
+                        conf.getMaxMessageSize(),
+                        conf.getS3Bucket(),
+                        new BasicAWSCredentials(conf.getAwsAccessKey(), conf.getAwsSecretKey()))
         );
 
         // Needed to serve static web pages from root.

@@ -5,6 +5,12 @@ kafka:
 
 topic: "source-topic"
 deviceTable: "devices"
+maxMessageSize: 24000
+
+awsAccessKey: "<<awsAccessKey>>"
+awsSecretKey: "<<awsSecretKey>>"
+s3Bucket: "manning-energy"
+
 
 database:
   driverClass: org.postgresql.Driver
