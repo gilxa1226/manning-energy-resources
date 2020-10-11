@@ -284,8 +284,13 @@
       <artifactId>avro-ipc</artifactId>
       <version>1.7.7</version>
     </dependency>
+      <dependency>
+          <groupId>org.apache.avro</groupId>
+          <artifactId>avro</artifactId>
+          <version>1.10.0</version>
+      </dependency>
 
-    <!-- Kafka for Junit Tests -->
+      <!-- Kafka for Junit Tests -->
     <!-- use: https://github.com/salesforce/kafka-junit/tree/master/kafka-junit4#kafkatestserver -->
 <!--    <dependency>-->
 <!--      <groupId>com.salesforce.kafka.test</groupId>-->

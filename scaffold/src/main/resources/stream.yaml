@@ -1,0 +1,16 @@
+
+applicationId: "device-to-storage-application"
+kafka:
+  bootstrap-servers: "localhost:29092"
+  schema-registry-url: "http://localhost:8090"
+#  overrides:
+#    "auto.offset.reset": "latest"
+
+source: "source-topic"
+deviceTable: "devices"
+
+database:
+  driverClass: org.postgresql.Driver
+  user: energy
+  password: password
+  url: "jdbc:postgresql://0.0.0.0:5432/energy"

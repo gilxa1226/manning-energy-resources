@@ -2,50 +2,66 @@ package server.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import io.dropwizard.db.DataSourceFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
+
 public class GridServerConfiguration extends Configuration {
-    @NotEmpty
-    private String template;
 
-    @NotEmpty
-    private String defaultName;
+    @Valid
+    @NotNull
+    private DataSourceFactory database = new DataSourceFactory();
+    private String deviceTable;
 
-    @NotEmpty
-    private String bootstrapServersConfig;
+    @NotNull
+    private String topic;
+    @NotNull
+    private Map<String, String> kafka = new HashMap<>();
 
-    @NotEmpty
-    private String schemaRegistryUrl;
-
-    @JsonProperty
-    public String getTemplate() {
-        return template;
+    @JsonProperty("database")
+    public void setDataSourceFactory(DataSourceFactory factory) {
+        this.database = factory;
     }
 
-    @JsonProperty
-    public void setTemplate(String template) {
-        this.template = template;
+    @JsonProperty("database")
+    public DataSourceFactory getDataSourceFactory() {
+        return database;
     }
 
-    @JsonProperty
-    public String getDefaultName() {
-        return defaultName;
+    @JsonProperty("topic")
+    public String getTopic() {
+        return topic;
     }
 
-    @JsonProperty
-    public void setDefaultName(String name) {
-        this.defaultName = name;
+    @JsonProperty("topic")
+    public void setTopic(String Topic) {
+        topic = Topic;
     }
 
-    @JsonProperty
-    public String getBootstrapServersConfig() { return bootstrapServersConfig; }
+    @JsonProperty("kafka")
+    public Map<String, String> getKafka(){
+        return this.kafka;
+    }
 
-    @JsonProperty
-    public void setBootstrapServersConfig(String bootstrapServersConfig) { this.bootstrapServersConfig = bootstrapServersConfig; }
+    @JsonProperty("kafka")
+    public void setKafka(Map<String, String> kafka) {
+        this.kafka = kafka;
+    }
 
-    @JsonProperty
-    public String getSchemaRegistryUrl() { return schemaRegistryUrl; }
+    @JsonProperty("deviceTable")
+    public String getDeviceTable() {
+        return deviceTable;
+    }
 
-    @JsonProperty
-    public void setSchemaRegistryUrl(String schemaRegistryUrl) { this.schemaRegistryUrl = schemaRegistryUrl; }
+    @JsonProperty("deviceTable")
+    public void setDeviceTable(String deviceTable) {
+        this.deviceTable = deviceTable;
+    }
+
+
+
 }
